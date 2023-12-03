@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditorInternal;
 using UnityEngine;
 
 public class KitchenGameManager : MonoBehaviour
@@ -24,7 +23,7 @@ public class KitchenGameManager : MonoBehaviour
     private State state;
     private float countDownToStartTimer = 3f;
     private float gamePlayingTimer;
-    private float gamePlayingTimerMax = 30f;
+    private float gamePlayingTimerMax = 3 * 60f;
 
     private bool isGamePaused = false;
 
@@ -37,13 +36,15 @@ public class KitchenGameManager : MonoBehaviour
     private void Start()
     {
         GameInput.Instance.OnPauseAction += GameInput_OnPauseAction;
-        GameInput.Instance.OnInteractAction += GameInput_OnInteractAction; 
+        GameInput.Instance.OnInteractAction += GameInput_OnInteractAction;
     }
 
-    private void GameInput_OnInteractAction(object sender, EventArgs e) {
-        if(state == State.WaitingToStart){
-            state=  State.CountDownToStart;
-            OnStateChanged?.Invoke(this,EventArgs.Empty);
+    private void GameInput_OnInteractAction(object sender, EventArgs e)
+    {
+        if (state == State.WaitingToStart)
+        {
+            state = State.CountDownToStart;
+            OnStateChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 
@@ -57,7 +58,7 @@ public class KitchenGameManager : MonoBehaviour
         switch (state)
         {
             case State.WaitingToStart:
-                
+
                 break;
             case State.CountDownToStart:
                 countDownToStartTimer -= Time.deltaTime;
@@ -112,10 +113,12 @@ public class KitchenGameManager : MonoBehaviour
         if (isGamePaused)
         {
             Time.timeScale = 0f;
-            OnGamePause?.Invoke(this,EventArgs.Empty);
-        }else{
-            Time.timeScale =  1f;
-            OnGameUnpaused?.Invoke(this,EventArgs.Empty);
+            OnGamePause?.Invoke(this, EventArgs.Empty);
+        }
+        else
+        {
+            Time.timeScale = 1f;
+            OnGameUnpaused?.Invoke(this, EventArgs.Empty);
         }
     }
 }

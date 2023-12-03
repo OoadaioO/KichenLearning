@@ -69,7 +69,7 @@ public class GameInput : MonoBehaviour
     public Vector2 GetMovementVectorNormalized()
     {
         Vector2 inputVector = playerInputActions.Player.Move.ReadValue<Vector2>();
-        inputVector = inputVector.normalized;
+        //inputVector = inputVector.normalized;
         return inputVector;
     }
 
@@ -148,5 +148,18 @@ public class GameInput : MonoBehaviour
             OnBindingRebind?.Invoke(this,EventArgs.Empty);
         })
         .Start();
+    }
+
+
+    public void Interact(){
+        Interact_performed(new InputAction.CallbackContext());
+    }
+
+    public void InteractAlternate(){
+        InteractAlternate_performed(new InputAction.CallbackContext());
+    }
+
+    public void PauseClick(){
+        Pause_performed(new InputAction.CallbackContext());
     }
 }

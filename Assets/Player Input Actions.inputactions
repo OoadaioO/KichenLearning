@@ -99,6 +99,61 @@
                     "isPartOfComposite": true
                 },
                 {
+                    "name": "Touch",
+                    "id": "72d72239-effa-4fde-b420-efdc48f9d384",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "3c6350c3-6a69-4523-bcd6-5431a14cc224",
+                    "path": "<Touchscreen>/delta/up",
+                    "interactions": "",
+                    "processors": "AxisDeadzone",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "aa6c21b9-354a-481c-b252-1da88718960c",
+                    "path": "<Touchscreen>/delta/down",
+                    "interactions": "",
+                    "processors": "AxisDeadzone",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "21b2fc40-63e0-4f72-b900-1edb54860996",
+                    "path": "<Touchscreen>/delta/left",
+                    "interactions": "",
+                    "processors": "AxisDeadzone",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "3a339079-a76c-4f24-9514-59887c72022e",
+                    "path": "<Touchscreen>/delta/right",
+                    "interactions": "",
+                    "processors": "AxisDeadzone",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "",
                     "id": "25972a18-01c6-40ea-b40d-358c7a39681d",
                     "path": "<Keyboard>/e",
