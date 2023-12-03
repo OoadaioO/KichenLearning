@@ -8,6 +8,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
 {
     public static Player Instance { get; private set; }
 
+    public event EventHandler OnPickedSomething;
     public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
     public class OnSelectedCounterChangedEventArgs : EventArgs
     {
@@ -41,6 +42,8 @@ public class Player : MonoBehaviour, IKitchenObjectParent
     }
 
     private void GameInput_OnInteractAlternateAction(object sender, EventArgs e) {
+        if(!KitchenGameManager.Instance.IsGamePlaying()) return;
+
          if (selectedCounter != null)
         {
             selectedCounter.InteractAlternate(this);
@@ -49,6 +52,8 @@ public class Player : MonoBehaviour, IKitchenObjectParent
 
     private void GameInput_OnInteractAction(object sender, System.EventArgs args)
     {
+        if(!KitchenGameManager.Instance.IsGamePlaying()) return;
+        
         if (selectedCounter != null)
         {
             selectedCounter.Interact(this);
@@ -123,7 +128,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
 
             // Attempt only move on the x
             Vector3 moveDirX = new Vector3(moveDir.x, 0, 0).normalized;
-            canMove = moveDir.x != 0 &&  !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirX, moveDistance);
+            canMove = Mathf.Abs(moveDir.x) > .5f &&  !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirX, moveDistance);
             if (canMove)
             {
                 moveDir = moveDirX;
@@ -132,7 +137,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
             {
                 // Attempt only move on the z
                 Vector3 moveDirZ = new Vector3(0, 0, moveDir.z).normalized;
-                canMove = moveDir.z != 0 && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirZ, moveDistance);
+                canMove = Mathf.Abs(moveDir.z) > .5f && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirZ, moveDistance);
                 if (canMove)
                 {
                     moveDir = moveDirZ;
@@ -172,6 +177,9 @@ public class Player : MonoBehaviour, IKitchenObjectParent
     public void SetKitchenObject(KitchenObject kitchenObject)
     {
         this.kitchenObject = kitchenObject;
+        if(kitchenObject != null){
+            OnPickedSomething?.Invoke(this,EventArgs.Empty);
+        }
     }
 
     public KitchenObject GetKitchenObject()
